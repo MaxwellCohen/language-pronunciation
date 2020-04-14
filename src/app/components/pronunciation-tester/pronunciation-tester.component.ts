@@ -1,6 +1,10 @@
-
+import { ILanguageData, IState } from './../../model/pronunciationInfo.model';
 import { Component, OnInit } from '@angular/core';
 import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as whatToSayActions from 'src/app/store/whatToSay/whatToSay.actions';
+
 
 @Component({
   selector: 'app-pronunciation-tester',
@@ -9,17 +13,22 @@ import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
 })
 
 export class PronunciationTesterComponent implements OnInit {
-  public whatToSay: IPronunciationInfo;
+  public whatToSay$: Observable<IPronunciationInfo>;
+  public whatIsHeard$: Observable<IPronunciationInfo>;
+  public language$: Observable<ILanguageData>;
   public whatIsHeard: IPronunciationInfo;
-  constructor() { }
+
+  constructor(private store: Store<IState>) {
+    this.whatToSay$ = store.pipe(select('whatToSay'));
+    this.whatIsHeard$ = store.pipe(select('whatIsHeard'));
+    this.language$ = store.pipe(select('language'));
+  }
+
   ngOnInit(): void {
-    this.whatToSay = {
-      term: '你好',
-      transliteration: '',
-      translation: 'hello',
-      language: 'zh-CN',
-      voice: 'zh-CN-Kangkang-Apollo'
-    };
-    this.whatIsHeard = {};
+
+    this.store.dispatch(whatToSayActions.manualyAddItem({
+        term: '你好',
+        translation: 'hello'
+    }));
   }
 }

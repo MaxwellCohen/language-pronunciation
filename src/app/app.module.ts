@@ -21,6 +21,9 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PronunciationTesterComponent } from './components/pronunciation-tester/pronunciation-tester.component';
 import { PronunciationInfoComponent } from './components/pronunciation-info/pronunciation-info.component';
 import { SoundRecordComponent } from './components/sound-record/sound-record.component';
+import { whatToSayReducer } from './store/whatToSay/whatToSay.reducer';
+import { languageReducer } from './store/language/language.reducer';
+import { whatisHeardReducer } from './store/whatIsHeard/whatIsHeard.reducer';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,11 @@ import { SoundRecordComponent } from './components/sound-record/sound-record.com
     MatCardModule,
     MatInputModule,
     MatButtonModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({
+      whatToSay: whatToSayReducer,
+      language: languageReducer,
+      whatIsHeard: whatisHeardReducer
+    })
   ],
   providers: [
   ],

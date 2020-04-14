@@ -1,8 +1,8 @@
 <mat-card class="card">
   <mat-card-subtitle class="section-title"> Say: </mat-card-subtitle>
-  <app-pronunciation-info [pronunciationInfo]="whatToSay" [readOutLoud]="true"></app-pronunciation-info>
+  <app-pronunciation-info [pronunciationInfo]="whatToSay$ | async" [language]="language$ | async" [readOutLoud]="true"></app-pronunciation-info>
   <mat-card-subtitle class="section-title"> We hear: </mat-card-subtitle>
-  <app-pronunciation-info [pronunciationInfo]="whatIsHeard"></app-pronunciation-info>
+  <app-pronunciation-info [pronunciationInfo]="whatIsHeard$ | async"></app-pronunciation-info>
   <app-sound-record></app-sound-record>
 </mat-card>
 
