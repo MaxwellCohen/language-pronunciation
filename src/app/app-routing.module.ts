@@ -1,6 +1,7 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PronunciationTesterComponent } from './pronunciation-tester/pronunciation-tester.component';
+import { PronunciationTesterComponent } from './components/pronunciation-tester/pronunciation-tester.component';
+
 
 
 const routes: Routes = [

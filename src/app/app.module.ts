@@ -6,17 +6,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PronunciationTesterComponent } from './pronunciation-tester/pronunciation-tester.component';
+
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { PronunciationInfoComponent } from './pronunciation-info/pronunciation-info.component';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { StoreModule } from '@ngrx/store';
-import { SoundRecordComponent } from './sound-record/sound-record.component';
+
 import { MatButtonModule } from '@angular/material/button';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { PronunciationTesterComponent } from './components/pronunciation-tester/pronunciation-tester.component';
+import { PronunciationInfoComponent } from './components/pronunciation-info/pronunciation-info.component';
+import { SoundRecordComponent } from './components/sound-record/sound-record.component';
 
 @NgModule({
   declarations: [

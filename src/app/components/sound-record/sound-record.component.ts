@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MircosoftSpeechService } from '../mircosoft-speech.service';
+import { MircosoftSpeechService } from 'src/app/services/mircosoft-speech.service';
+
 
 const RECORD_TEXT = 'Record';
 const STOP_TEXT = 'Stop';

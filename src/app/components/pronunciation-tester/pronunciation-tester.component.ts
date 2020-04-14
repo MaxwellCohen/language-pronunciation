@@ -1,5 +1,6 @@
-import { IPronunciationInfo } from './../model/pronunciationInfo.model';
+
 import { Component, OnInit } from '@angular/core';
+import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
 
 @Component({
   selector: 'app-pronunciation-tester',

@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { IPronunciationInfo } from '../model/pronunciationInfo.model';
-import { TtsService } from '../tts.service';
+import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
+import { TtsService } from 'src/app/services/tts.service';
+
+
 
 @Component({
   selector: 'app-pronunciation-info',
