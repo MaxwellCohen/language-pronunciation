@@ -22,15 +22,11 @@
     "@angular/platform-browser-dynamic": "~9.1.1",
     "@angular/router": "~9.1.1",
     "@ngrx/store": "^9.1.0",
-    "@types/video.js": "^7.3.7",
-    "@types/wavesurfer.js": "^3.2.0",
     "html-webpack-plugin": "^4.2.0",
     "microsoft-cognitiveservices-speech-sdk": "^1.11.0",
     "recorder-js": "^1.0.7",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "videojs-record": "^3.11.0",
-    "wavesurfer.js": "^3.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
