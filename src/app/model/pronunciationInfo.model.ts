@@ -5,9 +5,18 @@ export interface IPronunciationInfo {
 }
 
 export interface ILanguageData {
-  slang: string;
-  tlang: string;
+  speechLanguageTTS: string;
+  speechLanguageSTT: string;
+  userLanguage: string;
   voice: string;
+  transliterationOptions?: ItransliterationOptions;
+}
+
+
+export interface ItransliterationOptions {
+  language: string;
+  fromScript: string;
+  toScript: string;
 }
 
 export interface IState{

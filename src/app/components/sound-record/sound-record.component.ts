@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MircosoftSpeechService } from 'src/app/services/mircosoft-speech.service';
 import * as whatIsHeard from 'src/app/store/whatIsHeard/whatIsHeard.actions';
-import { Store } from '@ngrx/store';
-import { IState } from 'src/app/model/pronunciationInfo.model';
+import { Store, select } from '@ngrx/store';
+import { IState, ILanguageData } from 'src/app/model/pronunciationInfo.model';
+import { Observable, Subscription } from 'rxjs';
 
 
 const RECORD_TEXT = 'Record';
@@ -14,7 +15,7 @@ const STOP_TEXT = 'Stop';
   templateUrl: './sound-record.component.html',
   styleUrls: ['./sound-record.component.scss']
 })
-export class SoundRecordComponent implements OnInit {
+export class SoundRecordComponent implements OnInit, OnDestroy {
 
   // @ViewChild('audio', { static: true }) public audio: ElementRef;
   public AudioContext = window.AudioContext || (window as any).webkitAudioContext;
@@ -26,14 +27,26 @@ export class SoundRecordComponent implements OnInit {
   public rec; // Recorder.js object
   public input; // MediaStreamAudioSourceNode we'll be recording
   public recordingURL;
+  public language$: Subscription;
+  public speechLanguageSTT: string;
+  public tlang: string;
 
   constructor(private sanitizer: DomSanitizer,
               private mss: MircosoftSpeechService,
-              private store: Store<IState>) {}
+              private store: Store<IState>) {
+
+              }
 
   ngOnInit() {
     this.AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    this.language$ = this.store.pipe(select('language')).subscribe((data: ILanguageData) => {
+      this.speechLanguageSTT = data.speechLanguageSTT;
+      this.tlang = data.userLanguage;
+    });
   }
+  ngOnDestroy() {
+    this.language$.unsubscribe();
+}
 
 
   toggleRecordingStatus() {
@@ -47,7 +60,7 @@ export class SoundRecordComponent implements OnInit {
   startRecording() {
     console.log('recordButton clicked');
     this.startLocalRecording();
-    this.mss.startTranslation('zh-CN', 'en-US');
+    this.mss.startTranslation(this.speechLanguageSTT, this.tlang);
   }
 
 

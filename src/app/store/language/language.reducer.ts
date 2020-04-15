@@ -4,24 +4,31 @@ import { ILanguageData } from 'src/app/model/pronunciationInfo.model';
 
 
 export const initialState: ILanguageData = {
-  slang: 'zh-CN',
-  tlang: 'en-US',
+  speechLanguageSTT: 'zh-Hans',
+  userLanguage: 'en',
+  speechLanguageTTS: 'zh-Hans',
   voice: 'zh-CN-Kangkang-Apollo'
 };
 
 const reducer = createReducer(initialState,
-  on(Actions.setSpeechLanguage , (state, { slang }) => ({
+  on(Actions.setSpeechLanguage , (state, { speechLanguageSTT }) => ({
     ...state,
-    slang
+    speechLanguageSTT
   })),
-  on(Actions.setTranslationLanguage , (state, { tlang }) => ({
+  on(Actions.setTranslationLanguage , (state, { userLanguage }) => ({
     ...state,
-    tlang
+    userLanguage
   })),
   on(Actions.setVoice , (state, { voice }) => ({
     ...state,
     voice
   })),
+
+  on(Actions.updateLanguage, (state, newvals) => ({
+    ...state,
+    ...newvals
+  })),
+
   on(Actions.reset, state => (initialState)),
 );
 

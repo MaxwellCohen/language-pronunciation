@@ -18,7 +18,8 @@ export class PronunciationInfoComponent {
 
   play() {
     const audio = new Audio();
-    audio.src = this.tts.readURL(this.pronunciationInfo.term, this.language.slang, this.language.voice);
+    console.log(this.language);
+    audio.src = this.tts.readURL(this.pronunciationInfo.term, this.language.speechLanguageSTT, this.language.voice);
     audio.currentTime = 0;
     audio.load();
 

@@ -25,11 +25,11 @@ export class MircosoftSpeechService {
   }
 
 
-  startTranslation(slang, tLang) {
+  startTranslation(speechLanguageSTT, tLang) {
     this.store.dispatch(whatIsHeard.reset());
     const audioConfig = sdk.AudioConfig.fromDefaultMicrophoneInput();
     const speechConfig = sdk.SpeechTranslationConfig.fromAuthorizationToken(this.token, 'eastus');
-    speechConfig.speechRecognitionLanguage = slang;
+    speechConfig.speechRecognitionLanguage = speechLanguageSTT;
     speechConfig.addTargetLanguage(tLang);
     this.reco = new sdk.TranslationRecognizer(speechConfig, audioConfig);
     this.reco.recognized = (s, e) => {
