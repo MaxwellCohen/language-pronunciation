@@ -28,7 +28,7 @@ export class PronunciationTesterComponent implements OnInit {
 
     this.store.dispatch(whatToSayActions.manualyAddItem({
         term: '你好',
-        translation: 'hello'
+        // translation: 'hello'
     }));
   }
 }

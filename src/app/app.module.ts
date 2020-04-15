@@ -24,6 +24,7 @@ import { SoundRecordComponent } from './components/sound-record/sound-record.com
 import { whatToSayReducer } from './store/whatToSay/whatToSay.reducer';
 import { languageReducer } from './store/language/language.reducer';
 import { whatisHeardReducer } from './store/whatIsHeard/whatIsHeard.reducer';
+import { MircosoftSpeechService } from './services/mircosoft-speech.service';
 
 @NgModule({
   declarations: [
@@ -55,4 +56,8 @@ import { whatisHeardReducer } from './store/whatIsHeard/whatIsHeard.reducer';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private mss: MircosoftSpeechService) {
+    this.mss.init();
+  }
+}

@@ -1,6 +1,9 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MircosoftSpeechService } from 'src/app/services/mircosoft-speech.service';
+import * as whatIsHeard from 'src/app/store/whatIsHeard/whatIsHeard.actions';
+import { Store } from '@ngrx/store';
+import { IState } from 'src/app/model/pronunciationInfo.model';
 
 
 const RECORD_TEXT = 'Record';
@@ -24,7 +27,9 @@ export class SoundRecordComponent implements OnInit {
   public input; // MediaStreamAudioSourceNode we'll be recording
   public recordingURL;
 
-  constructor(private sanitizer: DomSanitizer, private mss: MircosoftSpeechService ) {}
+  constructor(private sanitizer: DomSanitizer,
+              private mss: MircosoftSpeechService,
+              private store: Store<IState>) {}
 
   ngOnInit() {
     this.AudioContext = window.AudioContext || (window as any).webkitAudioContext;
@@ -81,6 +86,7 @@ export class SoundRecordComponent implements OnInit {
   clearSoundRecording() {
     if (this.recordingURL ) {
       URL.revokeObjectURL(this.recordingURL);
+      this.store.dispatch(whatIsHeard.reset());
     }
     this.recordingURL = '';
   }
