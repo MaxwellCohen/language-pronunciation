@@ -5,6 +5,8 @@ import { IState, ILanguageData } from 'src/app/model/pronunciationInfo.model';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { updateLanguage } from 'src/app/store/language/language.actions';
+import * as whatToSayActions from 'src/app/store/whatToSay/whatToSay.actions';
+import * as whatIsHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 
 
 @Component({
@@ -31,7 +33,6 @@ export class LanguageSettingsComponent implements OnInit {
   getLangData() {
     this.langService.getLanguageData()
       .pipe(take(1)).subscribe((data) => {
-        console.log(data);
         this.langData = data;
         this.updateValuesfromStore();
     });
@@ -39,32 +40,29 @@ export class LanguageSettingsComponent implements OnInit {
 
   updateValuesfromStore() {
     this.language$.pipe(take(1)).subscribe((data: ILanguageData) => {
-      this.langSelected = this.langData.find((el) => el.code === data.speechLanguageTTS);
+      this.langSelected = this.langData.find((el) => el.code === data.learningLanguage);
       if (this.langSelected) {
         this.voiceSelected = this.langSelected.voices.find((el) => el.code === data.voice);
       }
       this.userLanguageSelected = this.langData.find((el) => el.code === data.userLanguage);
-
-      console.log(this.userLanguageSelected, data);
     });
   }
 
 
-  selectLanguage({value}) {
+  selectLearningLanguage({value}) {
     this.langSelected = value;
-    this.store.dispatch(updateLanguage({speechLanguageSTT: value.code}));
-    console.log(value);
+    this.store.dispatch(updateLanguage({learningLanguage: value.code}));
+    this.store.dispatch(whatToSayActions.reset());
+    this.store.dispatch(whatIsHeardActions.reset());
   }
 
   selectVoice({value}) {
     this.voiceSelected = value;
-    this.store.dispatch(updateLanguage({speechLanguageTTS: value.locale, voice: value.code}));
-    console.log(value);
+    this.store.dispatch(updateLanguage({voice: value.code}));
   }
 
   selectUserLanguage({value}) {
     this.userLanguageSelected = value;
     this.store.dispatch(updateLanguage({userLanguage: value.code}));
-    console.log(value);
   }
 }

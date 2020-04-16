@@ -20,7 +20,6 @@ export class SelectorComponent implements OnInit {
 
 
   onEventChange({value}) {
-    console.log(value);
     this.selectUpdate.emit({value});
   }
 

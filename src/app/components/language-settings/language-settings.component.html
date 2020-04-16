@@ -1,5 +1,6 @@
 <div>
-  <p>I would like to learn to speek <app-selector [labelName]="'Language'" [selectorData]="langData" (selectUpdate)="selectLanguage($event)" [selected]="langSelected" ></app-selector></p>
-  <p *ngIf="langSelected">using the <app-selector [labelName]="'select voice'"  [selectorData]="langSelected?.voices || []" (selectUpdate)="selectVoice($event)" [selected]="voiceSelected"></app-selector></p>
-  <p>I am speaking <app-selector [labelName]="'My Language'" [selectorData]="langData"  (selectUpdate)="selectUserLanguage($event)" [selected]="userLanguageSelected" ></app-selector></p>
+  <p>I would like to learn to speek
+  <app-selector [labelName]="'Language'" [selectorData]="langData" (selectUpdate)="selectLearningLanguage($event)" [selected]="langSelected" ></app-selector>
+  using <app-selector [labelName]="'select voice'"  [selectorData]="langSelected?.voices || []" (selectUpdate)="selectVoice($event)" [selected]="voiceSelected"></app-selector>
+  I can speek <app-selector [labelName]="'My Language'" [selectorData]="langData"  (selectUpdate)="selectUserLanguage($event)" [selected]="userLanguageSelected" ></app-selector></p>
 </div>

@@ -17,7 +17,6 @@ const STOP_TEXT = 'Stop';
 })
 export class SoundRecordComponent implements OnInit, OnDestroy {
 
-  // @ViewChild('audio', { static: true }) public audio: ElementRef;
   public AudioContext = window.AudioContext || (window as any).webkitAudioContext;
   public error = false;
   public recordButtonText = RECORD_TEXT;
@@ -40,8 +39,7 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     this.language$ = this.store.pipe(select('language')).subscribe((data: ILanguageData) => {
-      this.speechLanguageSTT = data.speechLanguageSTT;
-      this.tlang = data.userLanguage;
+      this.speechLanguageSTT = data.voice;
     });
   }
   ngOnDestroy() {
@@ -60,10 +58,8 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
   startRecording() {
     console.log('recordButton clicked');
     this.startLocalRecording();
-    this.mss.startTranslation(this.speechLanguageSTT, this.tlang);
+    this.mss.startTranslation();
   }
-
-
 
   stopRecording() {
     console.log('stopButton clicked');

@@ -1,3 +1,4 @@
+import { WhatToSayEffects } from './store/whatToSay/whatToSay.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,6 +29,8 @@ import { whatisHeardReducer } from './store/whatIsHeard/whatIsHeard.reducer';
 import { MircosoftSpeechService } from './services/mircosoft-speech.service';
 import { LanguageSettingsComponent } from './components/language-settings/language-settings.component';
 import { SelectorComponent } from './components/selector/selector.component';
+import { EffectsModule } from '@ngrx/effects';
+import { WhatIsHeardEffects } from './store/whatIsHeard/whatIsHeard.effects';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,8 @@ import { SelectorComponent } from './components/selector/selector.component';
       whatToSay: whatToSayReducer,
       language: languageReducer,
       whatIsHeard: whatisHeardReducer
-    })
+    }),
+    EffectsModule.forRoot([WhatToSayEffects, WhatIsHeardEffects ])
   ],
   providers: [
   ],

@@ -7,7 +7,8 @@ export class TtsService {
 
   constructor() { }
 
-  readURL(text, lang, voice): string {
+  readURL(text, voice): string {
+    const lang = voice.split('-').slice(0, 2).join('-');
     return `/api/tts?text=${text}&lang=${lang}&voice=${voice}`;
   }
 }

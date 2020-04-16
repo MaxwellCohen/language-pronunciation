@@ -4,9 +4,8 @@ import { ILanguageData } from 'src/app/model/pronunciationInfo.model';
 
 
 export const initialState: ILanguageData = {
-  speechLanguageSTT: 'zh-Hans',
   userLanguage: 'en',
-  speechLanguageTTS: 'zh-Hans',
+  learningLanguage: 'zh-Hans',
   voice: 'zh-CN-Kangkang-Apollo'
 };
 

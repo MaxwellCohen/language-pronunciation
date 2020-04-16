@@ -4,22 +4,16 @@ import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
 
 
 export const initialState: IPronunciationInfo = {
-  term: '',
-  transliteration: '',
-  translation: '',
+  text: '',
 };
 
 const reducer = createReducer(initialState,
-  on(manualyAddItem, (state, {term, transliteration, translation }) => ({
+  on(manualyAddItem, (state, value) => ({
     ...state,
-    term: term || state.term,
-    transliteration: transliteration || state.transliteration,
-    translation: translation || state.translation
+    ...value
   })),
   on(reset, state => ({
-    term: '',
-    transliteration: '',
-    translation: '',
+    text: ''
   })),
 );
 
