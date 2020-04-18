@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as Actions from './language.actions';
+import * as Actions from '../../components/language.actions';
 import { ILanguageData } from 'src/app/model/pronunciationInfo.model';
 
 

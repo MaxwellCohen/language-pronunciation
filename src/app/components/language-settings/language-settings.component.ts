@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { IState, ILanguageData } from 'src/app/model/pronunciationInfo.model';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { updateLanguage } from 'src/app/store/language/language.actions';
+import { updateLanguage } from 'src/app/components/language.actions';
 import * as whatToSayActions from 'src/app/store/whatToSay/whatToSay.actions';
 import * as whatIsHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 

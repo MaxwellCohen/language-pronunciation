@@ -2,7 +2,7 @@ import { LanguageService } from 'src/app/services/language.service';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import * as whatIsHeardActions from './whatIsHeard.actions';
-import { map, mergeMap } from 'rxjs/operators';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -16,8 +16,7 @@ export class WhatIsHeardEffects {
   @Effect()
   loadWord$ = this.actions$.pipe(
     ofType(whatIsHeardActions.translateAdd.type),
-    mergeMap((payload) => {
-      console.log();
+    switchMap((payload) => {
       return this.languageService.translation(payload).pipe(
         map(translation => {
           console.log(translation);
@@ -27,7 +26,6 @@ export class WhatIsHeardEffects {
             translation: translation.translation
           });
         }
-
         ));
     }
     ));

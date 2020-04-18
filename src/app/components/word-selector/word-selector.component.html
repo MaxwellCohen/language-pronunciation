@@ -1,0 +1,5 @@
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Word to learn</mat-label>
+    <input id="text" matInput #box [value]="currentWord" (keyup.enter)="update(box.value)" (blur)="update(box.value)">
+  </mat-form-field>

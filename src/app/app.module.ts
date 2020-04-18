@@ -31,6 +31,9 @@ import { LanguageSettingsComponent } from './components/language-settings/langua
 import { SelectorComponent } from './components/selector/selector.component';
 import { EffectsModule } from '@ngrx/effects';
 import { WhatIsHeardEffects } from './store/whatIsHeard/whatIsHeard.effects';
+import { WordSelectorComponent } from './components/word-selector/word-selector.component';
+import { soundsReducer } from './store/sounds/sounds.reducer';
+import { SoundsEffects } from './store/sounds/sounds.effects';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { WhatIsHeardEffects } from './store/whatIsHeard/whatIsHeard.effects';
     PronunciationInfoComponent,
     SoundRecordComponent,
     LanguageSettingsComponent,
-    SelectorComponent
+    SelectorComponent,
+    WordSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +62,10 @@ import { WhatIsHeardEffects } from './store/whatIsHeard/whatIsHeard.effects';
     StoreModule.forRoot({
       whatToSay: whatToSayReducer,
       language: languageReducer,
-      whatIsHeard: whatisHeardReducer
+      whatIsHeard: whatisHeardReducer,
+      sounds: soundsReducer
     }),
-    EffectsModule.forRoot([WhatToSayEffects, WhatIsHeardEffects ])
+    EffectsModule.forRoot([WhatToSayEffects, WhatIsHeardEffects, SoundsEffects  ])
   ],
   providers: [
   ],

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IState, ILanguageData } from '../model/pronunciationInfo.model';
 import { Store, select } from '@ngrx/store';
 import * as whatIsHeard from 'src/app/store/whatIsHeard/whatIsHeard.actions';
-import { SpeechConfig } from 'microsoft-cognitiveservices-speech-sdk';
+import * as soundActions from 'src/app/store/sounds/sounds.actions';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -18,7 +18,8 @@ export class MircosoftSpeechService {
   private reco;
   public language$: Observable<ILanguageData>;
 
-  constructor(private http: HttpClient, private store: Store<IState>) {
+  constructor(private http: HttpClient,
+              private store: Store<IState>) {
     this.language$ = store.pipe(select('language'));
    }
 
@@ -34,6 +35,7 @@ export class MircosoftSpeechService {
     let to;
     let from;
     let voice;
+    let text = null;
     this.store.dispatch(whatIsHeard.reset());
     this.language$.pipe(take(1)).subscribe((data) => {
       to = data.userLanguage;
@@ -46,10 +48,11 @@ export class MircosoftSpeechService {
     speechConfig.speechRecognitionLanguage = voice.split('-').slice(0, 2).join('-');
     this.reco = new sdk.SpeechRecognizer(speechConfig, audioConfig);
     this.reco.recognized = (s, e) => {
-      const text = e.result.text;
-      if (text) {
+      if (e.result.text && text !== e.result.text) {
+          text = e.result.text;
           console.log({text, to, from });
           this.store.dispatch(whatIsHeard.translateAdd({text, to, from }));
+          this.store.dispatch(soundActions.stopRecording());
       }
     };
     this.reco.startContinuousRecognitionAsync();

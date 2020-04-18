@@ -21,6 +21,7 @@ export interface IState{
   whatToSay: IPronunciationInfo;
   whatIsHeard: IPronunciationInfo;
   language: ILanguageData;
+  sounds: ISoundsData;
 }
 
 export interface ILanguageSupportData {
@@ -42,4 +43,10 @@ export interface ITranslation {
   textTransliteration: string;
   translation: string;
   translationTransliteration: string;
+}
+
+export interface ISoundsData {
+  error: boolean;
+  isRecording: boolean;
+  url: string;
 }
