@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { IState } from 'src/app/model/pronunciationInfo.model';
 import { Subscription } from 'rxjs';
 import * as soundActions from 'src/app/store/sounds/sounds.actions';
+import { TtsService } from 'src/app/services/tts.service';
 
 
 const RECORD_TEXT = 'Record';
@@ -24,7 +25,7 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
   public sounds$: Subscription;
   private isRecording: boolean;
 
-  constructor(private store: Store<IState>) {
+  constructor(private store: Store<IState>, private tts: TtsService) {
   }
 
   ngOnInit() {
@@ -48,18 +49,11 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
   }
 
   clearSoundRecording() {
-    this.store.dispatch(soundActions.removeSoundURL());
+    this.store.dispatch(soundActions.clearRecording());
   }
 
   play() {
-    const audio = new Audio();
-    audio.src = this.recordingURL;
-    audio.currentTime = 0;
-    audio.load();
-    return audio.play();
+    this.tts.play();
   }
-
-
-
 
 }

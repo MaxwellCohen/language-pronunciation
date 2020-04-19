@@ -1,12 +1,12 @@
 import { RecordingService } from './../../services/recording.service';
 import { Injectable } from '@angular/core';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { map, mergeMap, first, pluck, filter, tap, switchMap } from 'rxjs/operators';
+import { mergeMap, first, pluck, filter, switchMap } from 'rxjs/operators';
 import * as soundActions from './sounds.actions';
 import * as whatIsHeard from './../whatIsHeard/whatIsHeard.actions';
 import { Store, select } from '@ngrx/store';
 import { IState } from 'src/app/model/pronunciationInfo.model';
-import { of } from 'rxjs';
+import * as whatIsHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class SoundsEffects {
 
   @Effect()
   removeURL$ = this.actions$.pipe(
-    ofType(soundActions.removeSoundURL.type),
+    ofType(soundActions.clearRecording.type),
     mergeMap(() => {
       return this.store.pipe(
         select('sounds'),
@@ -30,7 +30,7 @@ export class SoundsEffects {
     filter((url) => !!url),
     switchMap((url) => {
       this.recordingService.clearSoundRecording(url);
-      return [soundActions.removeSoundURLSuccess()];
+      return [whatIsHeardActions.reset(), soundActions.removeSoundURLSuccess()];
     })
   );
 

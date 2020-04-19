@@ -3,6 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { IState } from 'src/app/model/pronunciationInfo.model';
 import { Subscription } from 'rxjs';
 import * as whatToSayActions from 'src/app/store/whatToSay/whatToSay.actions';
+import * as whatIsHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
+import * as soundActions from 'src/app/store/sounds/sounds.actions';
 
 
 @Component({
@@ -29,5 +31,6 @@ export class WordSelectorComponent implements OnInit, OnDestroy {
   update(text: string) {
     this.currentWord = text;
     this.store.dispatch(whatToSayActions.translateAdd({text}));
+    this.store.dispatch(soundActions.clearRecording());
   }
 }

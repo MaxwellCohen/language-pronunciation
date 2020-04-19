@@ -1,6 +1,12 @@
 <h2 *ngIf="error">we have an issue with the microphone</h2>
-<div class="flexRow">
-  <button (click)="toggleRecordingStatus()" mat-raised-button color="primary">{{recordButtonText}}</button>
-  <button (click)="clearSoundRecording()" [disabled]="!recordingURL" mat-raised-button >clear</button>
-  <button (click)="play()" [disabled]="!recordingURL" mat-raised-button >play</button>
+<div class="flex-col">
+  <div class="flexRow">
+    <button class="h-50 w-100 mb-10 mx-10" (click)="play()" mat-raised-button>play</button>
+  </div>
+  <div class="flexRow">
+    <button class="w-50 mx-10 h-50" (click)="clearSoundRecording()" [disabled]="!recordingURL"
+      mat-raised-button>clear</button>
+    <button class="w-50 mx-10 h-50" (click)="toggleRecordingStatus()" mat-raised-button
+      color="primary">{{recordButtonText}}</button>
+  </div>
 </div>

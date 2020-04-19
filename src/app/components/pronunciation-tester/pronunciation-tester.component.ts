@@ -25,12 +25,8 @@ export class PronunciationTesterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // this.store.dispatch(whatToSayActions.manualyAddItem({
-    //     text: '晚安',
-    // }));
-    this.language$.subscribe((data) => {
-      this.store.dispatch(whatToSayActions.translateAdd({text: 'hi'}));
+    this.language$.subscribe(() => {
+      this.store.dispatch(whatToSayActions.translateAdd({text: 'happy birthday'}));
     });
   }
 }

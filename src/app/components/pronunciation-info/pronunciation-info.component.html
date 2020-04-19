@@ -3,5 +3,4 @@
     <input id="text" matInput [value]="pronunciationInfo?.text" readonly="true">
     <mat-hint>{{pronunciationInfo?.transliteration}} <span *ngIf="pronunciationInfo?.transliteration" > -- </span>{{pronunciationInfo?.translation}}</mat-hint>
   </mat-form-field>
-  <button (click)="play()" *ngIf="readOutLoud && pronunciationInfo?.text" mat-raised-button >Hear Word</button>
 </div>

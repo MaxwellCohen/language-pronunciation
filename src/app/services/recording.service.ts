@@ -70,7 +70,7 @@ export class RecordingService {
     // create the wav blob and pass it on to createDownloadLink
     this.rec.exportWAV((blob) => {
       const url = URL.createObjectURL(blob);
-      this.store.dispatch(RecordingActions.removeSoundURL());
+      this.store.dispatch(RecordingActions.clearRecording());
       this.store.dispatch(RecordingActions.addSoundURL({url}));
     });
 
