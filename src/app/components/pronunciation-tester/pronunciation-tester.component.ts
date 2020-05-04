@@ -29,4 +29,9 @@ export class PronunciationTesterComponent implements OnInit {
       this.store.dispatch(whatToSayActions.translateAdd({text: 'happy birthday'}));
     });
   }
+
+  wordUpdate(text) {
+    this.store.dispatch(whatToSayActions.translatedAdd({text}));
+  }
+
 }

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSliderModule } from '@angular/material/slider';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -59,6 +60,7 @@ import { SoundsEffects } from './store/sounds/sounds.effects';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatExpansionModule,
     StoreModule.forRoot({
       whatToSay: whatToSayReducer,
       language: languageReducer,

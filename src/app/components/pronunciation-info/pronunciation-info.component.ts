@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
 
 
@@ -10,8 +10,13 @@ import { IPronunciationInfo } from 'src/app/model/pronunciationInfo.model';
 })
 export class PronunciationInfoComponent {
   @Input() pronunciationInfo: IPronunciationInfo;
-
+  @Input() readonly = false;
+  @Output() wordUpdate = new EventEmitter();
   constructor() {}
+
+  update(value) {
+    this.wordUpdate.emit(value);
+  }
 
 }
 

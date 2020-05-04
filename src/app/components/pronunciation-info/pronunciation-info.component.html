@@ -1,6 +1,8 @@
 <div class="pronunciation-info">
   <mat-form-field class="example-full-width">
-    <input id="text" matInput [value]="pronunciationInfo?.text" readonly="true">
-    <mat-hint>{{pronunciationInfo?.transliteration}} <span *ngIf="pronunciationInfo?.transliteration" > -- </span>{{pronunciationInfo?.translation}}</mat-hint>
+    <input #box id="text" matInput [value]="pronunciationInfo?.text" [readonly]="readonly"
+      (keyup.enter)="update(box.value)" (blur)="update(box.value)">
+    <mat-hint>{{pronunciationInfo?.transliteration}} <span *ngIf="pronunciationInfo?.transliteration"> --
+      </span>{{pronunciationInfo?.translation}}</mat-hint>
   </mat-form-field>
 </div>
