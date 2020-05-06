@@ -5,10 +5,8 @@
       "routePrefix": ""
     }
   },
-  "httpWorker": {
-    "description": {
-      "defaultExecutablePath": "node",
-      "defaultWorkerPath": "server/index.js"
-    }
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[1.*, 2.0.0)"
   }
 }
