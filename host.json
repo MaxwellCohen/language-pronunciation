@@ -1,0 +1,12 @@
+{
+  "version": "2.0",
+  "http": {
+    "routePrefix": ""
+  },
+  "httpWorker": {
+    "description": {
+        "defaultExecutablePath": "node",
+        "defaultWorkerPath": "server/index.js"
+    }
+}
+}
