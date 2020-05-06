@@ -4,9 +4,16 @@
         {
             "name": "Attach to Node Functions",
             "type": "node",
-            "request": "attach",
+            "request": "launch",
             "port": 9229,
-            "preLaunchTask": "func: host start"
+            "preLaunchTask": "func: host start",
+            "env": {
+              "TRANSLATOR_TEXT_SUBSCRIPTION_KEY":"fcdeafb0de7e49499cb057096703fdfb",
+              "SPEECH_SERVICE_KEY":"6da2c5c7c3b74f12a8d4c8ea8b6b58bd",
+              "SPEECH_SERVICE_REGION":"eastus",
+              "TRANSLATOR_TEXT_ENDPOINT":"https://api.cognitive.microsofttranslator.com/"
+          }
+
         }
     ]
 }

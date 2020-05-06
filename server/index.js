@@ -13,6 +13,7 @@ app.use(bodyParser.raw());
 app.use(express.static(www));
 app.use('/api', api);
 app.get('*', (req, res) => {
+  console.log(req.url)
   res.sendFile('index.html', { root: www });
 });
 
