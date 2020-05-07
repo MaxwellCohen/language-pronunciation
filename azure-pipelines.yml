@@ -15,11 +15,19 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: .
+    verbose: false
 
+- task: Npm@1
+  displayName: 'npm custom'
+  inputs:
+    command: custom
+    workingDir: .
+    verbose: false
+    customCommand: 'run build'
 - task: AzureFileCopy@2
   inputs:
     SourcePath: 'dist/language-pronunciation'
