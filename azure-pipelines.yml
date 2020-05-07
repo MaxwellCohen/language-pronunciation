@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 steps:
 - task: NodeTool@0
@@ -19,13 +19,6 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
-
-- task: CopyFiles@2
-  inputs:
-    Contents: 'dist/**' # Pull the build directory (React)
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-
 
 - task: AzureFileCopy@2
   inputs:
