@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: NodeTool@0
@@ -34,11 +34,3 @@ steps:
     Destination: 'AzureBlob'
     storage: 'languagepronunciation'
     ContainerName: 'www'
-
-- task: AzureFileCopy@4
-  inputs:
-    SourcePath: 'dist/**'
-    azureSubscription: 'Azure subscription 1(5b0c7c5e-c06d-4285-bab7-98bcdc5520fc)'
-    Destination: 'AzureBlob'
-    storage: 'languagepronunciation'
-    ContainerName: 'test'
