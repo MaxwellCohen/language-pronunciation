@@ -24,3 +24,13 @@ steps:
   inputs:
     Contents: 'dist/**' # Pull the build directory (React)
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+
+
+- task: AzureFileCopy@4
+  inputs:
+    SourcePath: 'dist/**'
+    azureSubscription: 'Azure subscription 1(5b0c7c5e-c06d-4285-bab7-98bcdc5520fc)'
+    Destination: 'AzureBlob'
+    storage: 'languagepronunciation'
+    ContainerName: 'www'
