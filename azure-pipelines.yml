@@ -27,10 +27,10 @@ steps:
 
 
 
-- task: AzureFileCopy@4
+- task: AzureFileCopy@2
   inputs:
-    SourcePath: 'dist/**'
+    SourcePath: 'dist/language-pronunciation'
     azureSubscription: 'Azure subscription 1(5b0c7c5e-c06d-4285-bab7-98bcdc5520fc)'
     Destination: 'AzureBlob'
     storage: 'languagepronunciation'
-    ContainerName: 'www'
+    ContainerName: '$web'
