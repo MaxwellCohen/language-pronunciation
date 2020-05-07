@@ -19,19 +19,20 @@ steps:
   displayName: 'npm install'
   inputs:
     workingDir: .
-    verbose: false
+    verbose: true
 
 - task: Npm@1
   displayName: 'npm custom'
   inputs:
     command: custom
     workingDir: .
-    verbose: false
+    verbose: true
     customCommand: 'run build'
+
 - task: AzureFileCopy@2
   inputs:
     SourcePath: 'dist/language-pronunciation'
     azureSubscription: 'Azure subscription 1(5b0c7c5e-c06d-4285-bab7-98bcdc5520fc)'
     Destination: 'AzureBlob'
     storage: 'languagepronunciation'
-    ContainerName: '$web'
+    ContainerName: 'languagepronunciationwebpage'
