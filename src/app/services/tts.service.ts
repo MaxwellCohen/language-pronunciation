@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { IState } from '../model/pronunciationInfo.model';
 import { Store, select } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { combineLatest, of, Observable } from 'rxjs';
+import { first, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TtsService {
 
-  constructor(private store: Store<IState>) { }
+  constructor(private store: Store<IState>, private http: HttpClient) { }
 
-  readURL(text, voice): string {
+  readURL(text, voice): Observable<any> {
     if (text && voice) {
       const lang = voice.split('-').slice(0, 2).join('-');
-      return `/api/tts?text=${text}&lang=${lang}&voice=${voice}`;
+      return this.http.get(`/api/tts?text=${text}&lang=${lang}&voice=${voice}`, {responseType: 'text'});
     }
-    return null;
+    return of(null);
   }
 
   play() {
@@ -25,12 +26,13 @@ export class TtsService {
       this.store.pipe(select('whatToSay')),
       this.store.pipe(select('sounds'))
     ]).pipe(first()).subscribe(([language, whatToSay, sounds]) => {
-      const playlist = [
-        this.readURL(whatToSay?.text, language?.voice),
-        sounds?.url
-      ].filter(Boolean);
-
-      this.playAudioArray(playlist);
+      return this.readURL(whatToSay?.text, language?.voice).subscribe((url) => {
+        const playlist = [
+          url,
+          sounds?.url
+        ].filter(Boolean);
+        this.playAudioArray(playlist);
+      });
     });
   }
 
