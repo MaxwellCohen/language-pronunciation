@@ -1,6 +1,14 @@
 <mat-card class="card">
   <app-language-settings></app-language-settings>
   The word I would like to learn <app-word-selector></app-word-selector>
+  <div>
+    <div *ngIf="isRecording$ | async;  else notRecording">  Recording  </div>
+    <ng-template #notRecording>
+      Not Recording
+    </ng-template>
+
+  </div>
+
   <mat-card-subtitle class="section-title"> Say: </mat-card-subtitle>
   <app-pronunciation-info [pronunciationInfo]="whatToSay$ | async" [readonly]="false" (wordUpdate)="wordUpdate($event)"></app-pronunciation-info>
   <mat-card-subtitle class="section-title"> We hear: </mat-card-subtitle>

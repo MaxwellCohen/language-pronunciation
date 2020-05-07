@@ -26,7 +26,7 @@ export class RecordingService {
     if (!this.recording) {
       this.recording = true;
       this.startLocalRecording();
-      this.mss.startTranslation();
+      // this.mss.startTranslation();
     }
 
   }
@@ -34,7 +34,7 @@ export class RecordingService {
   stopRecording() {
     this.recording = false;
     this.stopLocalRecording();
-    this.mss.stopTranslation();
+    // this.mss.stopTranslation();
   }
 
 
@@ -47,7 +47,7 @@ export class RecordingService {
       this.gumStream = stream;
       this.input = this.AudioContext.createMediaStreamSource(stream);
       // @ts-ignore
-      this.rec = new Recorder(this.input, { numChannels: 2 });
+      this.rec = new Recorder(this.input, { numChannels: 1 });
       // start the recording process
       this.rec.record();
       console.log('Recording started');
@@ -70,6 +70,7 @@ export class RecordingService {
     // create the wav blob and pass it on to createDownloadLink
     this.rec.exportWAV((blob) => {
       const url = URL.createObjectURL(blob);
+      this.mss.sttfromBlob(blob);
       this.store.dispatch(RecordingActions.clearRecording());
       this.store.dispatch(RecordingActions.addSoundURL({url}));
     });

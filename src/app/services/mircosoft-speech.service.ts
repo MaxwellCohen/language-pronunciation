@@ -15,7 +15,7 @@ import { take } from 'rxjs/operators';
 export class MircosoftSpeechService {
 
   private token;
-  private reco;
+  private reco: sdk.SpeechRecognizer;
   public language$: Observable<ILanguageData>;
 
   constructor(private http: HttpClient,
@@ -57,6 +57,35 @@ export class MircosoftSpeechService {
     };
     this.reco.startContinuousRecognitionAsync();
   }
+
+
+  sttfromBlob(blob) {
+    let to;
+    let from;
+    let voice;
+    let text = null;
+    this.store.dispatch(whatIsHeard.reset());
+    this.language$.pipe(take(1)).subscribe((data) => {
+      to = data.userLanguage;
+      from = data.learningLanguage;
+      voice = data.voice;
+    });
+    const audioConfig = sdk.AudioConfig.fromWavFileInput(new File([blob], 'test.wav', {type: 'audio/wave'}));
+    const speechConfig = sdk.SpeechConfig.fromAuthorizationToken(this.token, 'eastus');
+    speechConfig.speechRecognitionLanguage = voice.split('-').slice(0, 2).join('-');
+    this.reco = new sdk.SpeechRecognizer(speechConfig, audioConfig);
+    this.reco.recognized = (s, e) => {
+      if (e.result.text && text !== e.result.text) {
+          text = e.result.text;
+          console.log({text, to, from });
+          this.store.dispatch(whatIsHeard.translateAdd({text, to, from }));
+      } else {
+        this.store.dispatch(whatIsHeard.manualyAddItem({text: 'N/A'}));
+      }
+    };
+    this.reco.recognizeOnceAsync();
+  }
+
 
   stopTranslation() {
     const close = () => {
