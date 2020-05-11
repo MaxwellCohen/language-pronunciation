@@ -1,7 +1,7 @@
 import { WhatToSayEffects } from './store/whatToSay/whatToSay.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +32,7 @@ import { WhatIsHeardEffects } from './store/whatIsHeard/whatIsHeard.effects';
 import { WordSelectorComponent } from './components/word-selector/word-selector.component';
 import { soundsReducer } from './store/sounds/sounds.reducer';
 import { SoundsEffects } from './store/sounds/sounds.effects';
+import { APIInterceptor } from './services/apiInterceptor';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,11 @@ import { SoundsEffects } from './store/sounds/sounds.effects';
     EffectsModule.forRoot([WhatToSayEffects, WhatIsHeardEffects, SoundsEffects  ])
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

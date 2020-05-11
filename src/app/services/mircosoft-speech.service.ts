@@ -24,7 +24,7 @@ export class MircosoftSpeechService {
    }
 
   init() {
-    return this.http.get('api/token').subscribe((v: any) => {
+    return this.http.get('/api/token').subscribe((v: any) => {
       this.token = v && v.token;
       return v;
     });
@@ -50,7 +50,6 @@ export class MircosoftSpeechService {
     this.reco.recognized = (s, e) => {
       if (e.result.text && text !== e.result.text) {
           text = e.result.text;
-          console.log({text, to, from });
           this.store.dispatch(whatIsHeard.translateAdd({text, to, from }));
           this.store.dispatch(soundActions.stopRecording());
       }
@@ -59,12 +58,11 @@ export class MircosoftSpeechService {
   }
 
 
-  sttfromBlob(blob) {
+  sttFromBlob(blob) {
     let to;
     let from;
     let voice;
     let text = null;
-    this.store.dispatch(whatIsHeard.reset());
     this.language$.pipe(take(1)).subscribe((data) => {
       to = data.userLanguage;
       from = data.learningLanguage;
@@ -77,7 +75,6 @@ export class MircosoftSpeechService {
     this.reco.recognized = (s, e) => {
       if (e.result.text && text !== e.result.text) {
           text = e.result.text;
-          console.log({text, to, from });
           this.store.dispatch(whatIsHeard.translateAdd({text, to, from }));
       } else {
         this.store.dispatch(whatIsHeard.manualyAddItem({text: 'N/A'}));

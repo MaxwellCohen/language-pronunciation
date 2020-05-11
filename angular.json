@@ -38,6 +38,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/recorder-js/dist/recorder.js"
             ]
           },
           "configurations": {

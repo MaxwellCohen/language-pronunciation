@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IState } from '../model/pronunciationInfo.model';
 import { Store, select } from '@ngrx/store';
 import { combineLatest, of, Observable } from 'rxjs';
-import { first, tap } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({

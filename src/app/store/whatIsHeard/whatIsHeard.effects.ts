@@ -19,7 +19,6 @@ export class WhatIsHeardEffects {
     switchMap((payload) => {
       return this.languageService.translation(payload).pipe(
         map(translation => {
-          console.log(translation);
           return whatIsHeardActions.manualyAddItem({
             text: translation.text,
             transliteration: translation.textTransliteration,

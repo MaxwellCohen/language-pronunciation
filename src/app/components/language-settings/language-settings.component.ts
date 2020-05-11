@@ -20,6 +20,7 @@ export class LanguageSettingsComponent implements OnInit {
   public langSelected = null;
   public voiceSelected = null;
   public userLanguageSelected = null;
+  public panelOpenState = false;
 
   constructor(private langService: LanguageService, private store: Store<IState>) {
     this.language$ = store.pipe(select('language'));

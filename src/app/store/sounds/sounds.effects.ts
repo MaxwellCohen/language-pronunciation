@@ -30,7 +30,8 @@ export class SoundsEffects {
     filter((url) => !!url),
     switchMap((url) => {
       this.recordingService.clearSoundRecording(url);
-      return [whatIsHeardActions.reset(), soundActions.removeSoundURLSuccess()];
+      return [
+         soundActions.removeSoundURLSuccess()];
     })
   );
 
