@@ -6,9 +6,9 @@
   <div class="flexRow">
     <button class="w-50 mx-10 h-50" (click)="clearSoundRecording()" [disabled]="!recordingURL"
       mat-raised-button>clear</button>
-    <button class="w-50 mx-10 h-50" (mousedown)="toggleRecordingStatus()" (mouseup)="toggleRecordingStatus()"
-    (touchstart)="toggleRecordingStatus()"
-    (touchend)="toggleRecordingStatus()"
+    <button class="w-50 mx-10 h-50" (mousedown)="toggleRecordingStatus($event)" (mouseup)="toggleRecordingStatus($event)"
+    (touchstart)="toggleRecordingStatus($event)"
+    (touchend)="toggleRecordingStatus($event)"
     mat-raised-button
       color="primary">{{recordButtonText}}</button>
   </div>

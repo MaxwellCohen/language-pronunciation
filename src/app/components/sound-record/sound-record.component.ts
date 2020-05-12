@@ -41,7 +41,8 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
     this.sounds$.unsubscribe();
   }
 
-  toggleRecordingStatus() {
+  toggleRecordingStatus($event) {
+    $event.stopPropagation();
     if (this.isRecording) {
       this.store.dispatch(soundActions.stopRecording());
     } else {
