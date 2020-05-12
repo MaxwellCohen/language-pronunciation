@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { IState } from 'src/app/model/pronunciationInfo.model';
 import { Subscription } from 'rxjs';
 import * as soundActions from 'src/app/store/sounds/sounds.actions';
-import * as wahtisHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
+import * as whatisHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 import { TtsService } from 'src/app/services/tts.service';
 
 
@@ -34,6 +34,7 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
       this.isRecording = data.isRecording;
       this.recordButtonText = this.isRecording ? STOP_TEXT : RECORD_TEXT;
       this.recordingURL = data.url;
+      this.error = data.error;
     });
   }
 
@@ -46,13 +47,13 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
     if (this.isRecording) {
       this.store.dispatch(soundActions.stopRecording());
     } else {
-      this.store.dispatch(soundActions.startRecording({}));
+      this.store.dispatch(soundActions.startRecording());
     }
   }
 
   clearSoundRecording() {
     this.store.dispatch(soundActions.clearRecording());
-    this.store.dispatch(wahtisHeardActions.reset());
+    this.store.dispatch(whatisHeardActions.reset());
   }
 
   play() {

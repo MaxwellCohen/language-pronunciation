@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 
 export const play = createAction('[sounds] play');
-export const startRecording = createAction('[sounds] startRecording', props<{}>());
+export const startRecording = createAction('[sounds] startRecording');
 export const startRecordingSuccess = createAction('[sounds] startRecordingSuccess');
 export const stopRecording = createAction('[sounds] stopRecording');
 export const stopRecordingSuccess = createAction('[sounds] stopRecordingSuccess');

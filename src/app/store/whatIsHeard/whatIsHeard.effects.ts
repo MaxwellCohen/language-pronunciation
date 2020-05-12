@@ -20,12 +20,14 @@ export class WhatIsHeardEffects {
       return this.languageService.translation(payload).pipe(
         map(translation => {
           return whatIsHeardActions.manualyAddItem({
-            text: translation.text,
-            transliteration: translation.textTransliteration,
-            translation: translation.translation
-          });
-        }
-        ));
+              text: translation.text,
+              transliteration: translation.textTransliteration,
+              translation: translation.translation,
+              analyzing: false
+            });
+          }
+        )
+      );
     }
     ));
 }

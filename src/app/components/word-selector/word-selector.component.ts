@@ -32,5 +32,6 @@ export class WordSelectorComponent implements OnInit, OnDestroy {
     this.currentWord = text;
     this.store.dispatch(whatToSayActions.translateAdd({text}));
     this.store.dispatch(soundActions.clearRecording());
+    this.store.dispatch(whatIsHeardActions.reset());
   }
 }

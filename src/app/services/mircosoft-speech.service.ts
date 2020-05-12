@@ -7,6 +7,7 @@ import * as whatIsHeard from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 import * as soundActions from 'src/app/store/sounds/sounds.actions';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import * as RecordingActions from 'src/app/store/sounds/sounds.actions';
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class MircosoftSpeechService {
 
   init() {
     return this.http.get('/api/token').subscribe((v: any) => {
-      this.token = v && v.token;
+      this.token = v?.token;
       return v;
     });
   }
@@ -58,7 +59,7 @@ export class MircosoftSpeechService {
   }
 
 
-  sttFromBlob(blob) {
+  sttFromBlob(blob: BlobPart) {
     let to;
     let from;
     let voice;
@@ -80,7 +81,11 @@ export class MircosoftSpeechService {
         this.store.dispatch(whatIsHeard.manualyAddItem({text: 'N/A', analyzing: false}));
       }
     };
-    this.reco.recognizeOnceAsync();
+
+    this.reco.recognizeOnceAsync( () => {}, () => {
+      this.store.dispatch(whatIsHeard.reset());
+      this.store.dispatch(RecordingActions.hasError());
+    });
   }
 
 
