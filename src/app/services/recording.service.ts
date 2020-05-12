@@ -25,7 +25,7 @@ export class RecordingService {
   startRecording() {
     if (!this.recording) {
       this.recording = true;
-      this.store.dispatch(whatIsHeard.manualyAddItem({text: 'Recording...'}));
+      this.store.dispatch(whatIsHeard.manualyAddItem({text: 'Recording...',  analyzing: false}));
       this.startLocalRecording();
     }
   }
@@ -63,7 +63,7 @@ export class RecordingService {
     // stop microphone access
     this.gumStream.getAudioTracks()[0].stop();
     // create the wav blob and pass it on to createDownloadLink
-    this.store.dispatch(whatIsHeard.manualyAddItem({text: 'Analyzing...'}));
+    this.store.dispatch(whatIsHeard.manualyAddItem({text: 'Analyzing...',  analyzing: false}));
     this.rec.exportWAV((blob) => {
       const url = URL.createObjectURL(blob);
       this.mss.sttFromBlob(blob);

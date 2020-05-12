@@ -33,6 +33,8 @@ import { WordSelectorComponent } from './components/word-selector/word-selector.
 import { soundsReducer } from './store/sounds/sounds.reducer';
 import { SoundsEffects } from './store/sounds/sounds.effects';
 import { APIInterceptor } from './services/apiInterceptor';
+import { StatusTrackerComponent } from './components/status-tracker/status-tracker.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { APIInterceptor } from './services/apiInterceptor';
     SoundRecordComponent,
     LanguageSettingsComponent,
     SelectorComponent,
-    WordSelectorComponent
+    WordSelectorComponent,
+    StatusTrackerComponent
   ],
   imports: [
     BrowserModule,

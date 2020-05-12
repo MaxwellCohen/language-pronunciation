@@ -31,7 +31,8 @@ export class WhatToSayEffects {
         map((translation: ITranslation) => (manualyAddItem({
           text: translation?.translation ?? '',
           transliteration: translation?.translationTransliteration ?? '',
-          translation: translation?.text ?? ''
+          translation: translation?.text ?? '',
+          analyzing: false
         }))));
     }
     ));

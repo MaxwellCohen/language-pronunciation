@@ -2,6 +2,7 @@ export interface IPronunciationInfo {
   text?: string;
   transliteration?: string;
   translation?: string;
+  analyzing?: boolean;
 }
 
 export interface ILanguageData {

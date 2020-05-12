@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { IState } from 'src/app/model/pronunciationInfo.model';
 import { Subscription } from 'rxjs';
 import * as soundActions from 'src/app/store/sounds/sounds.actions';
+import * as wahtisHeardActions from 'src/app/store/whatIsHeard/whatIsHeard.actions';
 import { TtsService } from 'src/app/services/tts.service';
 
 
@@ -50,6 +51,7 @@ export class SoundRecordComponent implements OnInit, OnDestroy {
 
   clearSoundRecording() {
     this.store.dispatch(soundActions.clearRecording());
+    this.store.dispatch(wahtisHeardActions.reset());
   }
 
   play() {

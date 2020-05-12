@@ -17,18 +17,16 @@ export class PronunciationTesterComponent implements OnInit {
   public whatIsHeard$: Observable<IPronunciationInfo>;
   public language$: Observable<ILanguageData>;
   public whatIsHeard: IPronunciationInfo;
-  public isRecording$: Observable<boolean>;
 
   constructor(private store: Store<IState>) {
     this.whatToSay$ = store.pipe(select('whatToSay'));
     this.whatIsHeard$ = store.pipe(select('whatIsHeard'));
     this.language$ = store.pipe(select('language'));
-    this.isRecording$ = this.store.pipe(select('sounds', 'isRecording'));
   }
 
   ngOnInit(): void {
     this.language$.subscribe(() => {
-      this.store.dispatch(whatToSayActions.translateAdd({text: 'happy birthday'}));
+      this.store.dispatch(whatToSayActions.translateAdd({text: 'hello'}));
     });
   }
 

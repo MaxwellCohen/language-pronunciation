@@ -77,7 +77,7 @@ export class MircosoftSpeechService {
           text = e.result.text;
           this.store.dispatch(whatIsHeard.translateAdd({text, to, from }));
       } else {
-        this.store.dispatch(whatIsHeard.manualyAddItem({text: 'N/A'}));
+        this.store.dispatch(whatIsHeard.manualyAddItem({text: 'N/A', analyzing: false}));
       }
     };
     this.reco.recognizeOnceAsync();
